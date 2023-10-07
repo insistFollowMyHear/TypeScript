@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ts-node ./src/crawler.ts",
     "dev:build": "tsc -w",
     "dev:start": "nodemon ./build/index.js",
     "dev": "tsc && concurrently npm:dev:*"
@@ -21,6 +20,7 @@
     "cheerio": "^1.0.0-rc.12",
     "cookie-session": "^2.0.0",
     "moment": "^2.29.4",
+    "reflect-metadata": "^0.1.13",
     "superagent": "^8.1.2"
   },
   "devDependencies": {
