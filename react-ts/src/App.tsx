@@ -1,9 +1,15 @@
-import React from 'react';
+import React from "react";
+import { HashRouter, Routes, Route } from "react-router-dom";
+import LoginPage from "./views/login";
 
-const App: React.FC = () => {
+export default () => {
   return (
-    <div>Hello world!</div>
-  );
+    <div>
+      <HashRouter>
+        <Routes>
+          <Route path="/login" Component={LoginPage}></Route>
+        </Routes>
+      </HashRouter>
+    </div>
+  )
 }
-
-export default App;
