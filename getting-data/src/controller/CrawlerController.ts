@@ -13,7 +13,6 @@ interface BodyRequest extends Request {
 
 const checkLogin = (req: Request, res: Response, next: NextFunction): void => {
   const isLogin = !!(req.session ? req.session.login : false);
-  console.log('checkLogin')
   if (isLogin) {
     next();
   } else {
@@ -21,12 +20,7 @@ const checkLogin = (req: Request, res: Response, next: NextFunction): void => {
   }
 };
 
-const test = (req: Request, res: Response, next: NextFunction): void => {
-  console.log('test middleware');
-  next();
-}
-
-@controller('/')
+@controller('/api')
 export class CrawlerController {
   @get('/getData')
   @use(checkLogin)
@@ -39,7 +33,6 @@ export class CrawlerController {
   }
   @get('/showData')
   @use(checkLogin)
-  @use(test)
   showData(req: BodyRequest, res: Response): void {
     try {
       const position = path.resolve(__dirname, '../../data/course.json');

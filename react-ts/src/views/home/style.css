@@ -1,0 +1,11 @@
+.home-page {
+  padding: 0 80px;
+}
+
+.home-page .btns {
+  width: 180px;
+  padding: 20px;
+  margin: 20px auto 60px;
+  display: flex;
+  justify-content: space-between;
+}

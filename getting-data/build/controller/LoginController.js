@@ -18,11 +18,15 @@ let LoginController = LoginController_1 = class LoginController {
     static isLogin(req) {
         return !!(req.session ? req.session.login : false);
     }
+    isLogin(req, res) {
+        const isLogin = LoginController_1.isLogin(req);
+        res.json((0, util_1.getResponseData)(isLogin));
+    }
     login(req, res) {
         const { password } = req.body;
         const isLogin = LoginController_1.isLogin(req);
         if (isLogin) {
-            res.json((0, util_1.getResponseData)(false, '已经登陆过'));
+            res.json((0, util_1.getResponseData)(true));
         }
         else {
             if (password === '123' && req.session) {
@@ -40,33 +44,13 @@ let LoginController = LoginController_1 = class LoginController {
         }
         res.json((0, util_1.getResponseData)(true));
     }
-    home(req, res) {
-        const isLogin = LoginController_1.isLogin(req);
-        if (isLogin) {
-            res.send(`
-        <html>
-          <body>
-            <a href='/getData'>爬取内容</a>
-            <a href='/showData'>展示内容</a>
-            <a href='/logout'>退出</a>
-          </body>
-        </html>
-      `);
-        }
-        else {
-            res.send(`
-        <html>
-          <body>
-            <form method="post" action="/login">
-              <input type="password" name="password" />
-              <button>登陆</button>
-            </form>
-          </body>
-        </html>
-      `);
-        }
-    }
 };
+__decorate([
+    (0, decorator_1.get)('/isLogin'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", void 0)
+], LoginController.prototype, "isLogin", null);
 __decorate([
     (0, decorator_1.post)('/login'),
     __metadata("design:type", Function),
@@ -79,13 +63,7 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], LoginController.prototype, "logout", null);
-__decorate([
-    (0, decorator_1.get)('/'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", void 0)
-], LoginController.prototype, "home", null);
 LoginController = LoginController_1 = __decorate([
-    (0, decorator_1.controller)('/')
+    (0, decorator_1.controller)('/api')
 ], LoginController);
 exports.LoginController = LoginController;

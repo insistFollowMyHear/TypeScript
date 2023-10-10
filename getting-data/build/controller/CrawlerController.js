@@ -22,17 +22,12 @@ const crawler_1 = __importDefault(require("../utils/crawler"));
 const analyse_1 = __importDefault(require("../utils/analyse"));
 const checkLogin = (req, res, next) => {
     const isLogin = !!(req.session ? req.session.login : false);
-    console.log('checkLogin');
     if (isLogin) {
         next();
     }
     else {
         res.json((0, util_1.getResponseData)(null, '请先登录'));
     }
-};
-const test = (req, res, next) => {
-    console.log('test middleware');
-    next();
 };
 let CrawlerController = class CrawlerController {
     getData(req, res) {
@@ -63,12 +58,11 @@ __decorate([
 __decorate([
     (0, decorator_1.get)('/showData'),
     (0, decorator_1.use)(checkLogin),
-    (0, decorator_1.use)(test),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], CrawlerController.prototype, "showData", null);
 CrawlerController = __decorate([
-    (0, decorator_1.controller)('/')
+    (0, decorator_1.controller)('/api')
 ], CrawlerController);
 exports.CrawlerController = CrawlerController;
