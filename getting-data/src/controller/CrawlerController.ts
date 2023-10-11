@@ -29,7 +29,7 @@ export class CrawlerController {
     const url = `http://www.dell-lee.com/typescript/demo.html?secret=${secret}`;
     const analyzer = Analyzer.getInstance();
     new Crowller(url, analyzer);
-    res.json(getResponseData(true));
+    res.json(getResponseData<responseRequest.getData>(true));
   }
   @get('/showData')
   @use(checkLogin)
@@ -37,9 +37,9 @@ export class CrawlerController {
     try {
       const position = path.resolve(__dirname, '../../data/course.json');
       const result = fs.readFileSync(position, 'utf8');
-      res.json(getResponseData(JSON.parse(result)));
+      res.json(getResponseData<responseRequest.showData>(JSON.parse(result)));
     } catch (e) {
-      res.json(getResponseData(false, '数据不存在'));
+      res.json(getResponseData<responseRequest.showData>(false, '数据不存在'));
     }
   }
 }

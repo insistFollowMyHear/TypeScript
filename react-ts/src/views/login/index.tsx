@@ -13,7 +13,7 @@ const onFinish = (values: any, changeLoginStatus: Function) => {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   }).then(res => {
-    const data: Boolean = res.data;
+    const data: responseRequest.login = res.data;
     if (data) {
       changeLoginStatus(true)
     } else {

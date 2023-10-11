@@ -5,19 +5,10 @@ import ReactECharts from 'echarts-for-react';
 import request from '../../request';
 import './style.css';
 
-interface CourseItem {
-  title: string;
-  count: number;
-}
-
-interface DataStructure {
-  [key: string]: CourseItem[];
-}
-
 interface State {
   isLogin: boolean;
   loaded: boolean;
-  data: DataStructure;
+  data: responseRequest.showData; // ----- 后续再次优化 -----
 }
 
 class Home extends Component {
@@ -33,7 +24,7 @@ class Home extends Component {
   // }
   componentDidMount(): void {
     request.get('/api/isLogin').then(res => {
-      const data: Boolean = res.data;
+      const data: responseRequest.isLogin = res.data;
       if (!data) {
         this.setState({
           isLogin: false
@@ -47,7 +38,7 @@ class Home extends Component {
 
     if (this.state.isLogin) {
       request.get('/api/showData').then(res => {
-        const data: DataStructure = res.data;
+        const data: responseRequest.showDataBoolean = res.data;
         if (data) {
           this.setState({
             data
@@ -61,7 +52,7 @@ class Home extends Component {
 
   handleLogoutClick: () => void = () => {
     request.get('/api/logout').then(res => {
-      const data: Boolean = res.data;
+      const data: responseRequest.logout = res.data;
       if (data) {
         this.setState({
           isLogin: false
@@ -74,7 +65,7 @@ class Home extends Component {
 
   handleGetDataClick: () => void = () => {
     request.get('/api/getData').then(res => {
-      const data: Boolean = res.data;
+      const data: responseRequest.getData = res.data;
       if (data) {
         message.success('爬取成功');
       } else {

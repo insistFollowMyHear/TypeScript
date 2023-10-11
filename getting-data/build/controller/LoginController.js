@@ -20,7 +20,8 @@ let LoginController = LoginController_1 = class LoginController {
     }
     isLogin(req, res) {
         const isLogin = LoginController_1.isLogin(req);
-        res.json((0, util_1.getResponseData)(isLogin));
+        const result = (0, util_1.getResponseData)(isLogin);
+        res.json(result);
     }
     login(req, res) {
         const { password } = req.body;
